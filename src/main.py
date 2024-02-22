@@ -1,4 +1,5 @@
 import pygame
+from pygame.font import Font
 
 from components.base import *
 from components.widgets import *
@@ -9,34 +10,39 @@ pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("PLAY ME")
 
+title = Text("DO YOU WANNA BE MY GIRLFRIEND?",
+             FONT_SIZE, COLORS["BLACK"],
+             WIDTH // 2, HEIGHT // 2 - 2 * BUTTON_HEIGHT)
 
-def main():
-    title = Text("DO YOU WANNA BE MY GIRLFRIEND?",
-                 FONT_SIZE, COLORS["BLACK"],
-                 WIDTH // 2, HEIGHT // 2 - 2 * BUTTON_HEIGHT)
+yes_button = YesButton()
+no_button = NoButton()
 
-    yes_button = YesButton()
-    no_button = NoButton()
+interactive_text = InteractiveText("I think you're trying to press the wrong button",
+                                  int(FONT_SIZE * 0.8), COLORS["WHITE"],
+                                  WIDTH // 2, HEIGHT // 2 + 2 * BUTTON_HEIGHT, no_button, 5)
 
-    running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            else:
-                no_button.update(event)
+interactive_text2 = InteractiveText("Ok... I'll help you",
+                                    int(FONT_SIZE * 0.8), COLORS["WHITE"],
+                                    WIDTH // 2, HEIGHT // 2 + 2 * BUTTON_HEIGHT + 20, no_button, 10, True)
 
-        screen.fill(COLORS["GHOST WHITE"])
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        else:
+            no_button.update(event)
 
-        title.draw(screen)
+    screen.fill(COLORS["GHOST WHITE"])
 
-        no_button.draw(screen)
-        yes_button.draw(screen)
+    title.draw(screen)
 
-        pygame.display.flip()
+    yes_button.draw(screen)
+    no_button.draw(screen)
 
-    pygame.quit()
+    interactive_text.draw(screen)
+    interactive_text2.draw(screen)
 
+    pygame.display.flip()
 
-if __name__ == "__main__":
-    main()
+pygame.quit()
