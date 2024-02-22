@@ -28,13 +28,14 @@ while running:
             running = False
         else:
             no_button.update(event)
+            yes_button.update(event)
 
     screen.fill(COLORS["GHOST WHITE"])
 
     title.draw(screen)
 
-    yes_button.draw(screen)
     no_button.draw(screen)
+    yes_button.draw(screen)
 
     interactive_text.draw(screen)
 
