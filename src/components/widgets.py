@@ -5,7 +5,7 @@ from .base import *
 from .constants import *
 
 class Button:
-    def __init__(self, image, rect, hover_image = None, hover = False):
+    def __init__(self, image, rect, hover_image=None, hover=False):
         self.image = image
         self.hover_image = hover_image
         self.rect = rect
@@ -29,6 +29,7 @@ class YesButton(Button):
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
+        self.clicked = False
         super().__init__(self.image, self.rect, self.hover_image)
 
     def draw(self, screen):
@@ -46,6 +47,27 @@ class YesButton(Button):
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 print("YES")
+                self.clicked = True
+
+
+class BackButton(Button):
+    def __init__(self):
+        self.image = load_button_image("assets/NO.png")
+        self.rect = pygame.Rect(
+            WIDTH // 2 - BUTTON_WIDTH // 2 + MARGIN,
+            HEIGHT // 2 - BUTTON_HEIGHT,
+            BUTTON_WIDTH,
+            BUTTON_HEIGHT
+        )
+        self.clicked = False
+        super().__init__(self.image, self.rect)
+
+    def update(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.rect.collidepoint(event.pos):
+                self.clicked = True
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.clicked = False
 
 
 class NoButton(Button):
@@ -72,6 +94,25 @@ class NoButton(Button):
 
     def get_out(self):
         self.rect.x, self.rect.y = -500, -500
+
+class BackButton(Button):
+    def __init__(self):
+        self.image = load_button_image("assets/NO.png")
+        self.rect = pygame.Rect(
+            WIDTH // 2 - BUTTON_WIDTH // 2 + MARGIN,
+            HEIGHT // 2 - BUTTON_HEIGHT,
+            BUTTON_WIDTH,
+            BUTTON_HEIGHT
+        )
+        self.clicked = False
+        super().__init__(self.image, self.rect)
+
+    def update(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.rect.collidepoint(event.pos):
+                self.clicked = True
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.clicked = False
 
 class Text:
     def __init__(self, text, font_size, color, x, y):

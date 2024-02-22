@@ -5,40 +5,61 @@ from components.base import *
 from components.widgets import *
 from components.constants import *
 
-pygame.init()
+from scenes.main_scene import main_scene
+from scenes.new_scene import new_scene
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("PLAY ME")
 
-# DO YOU WANNA BE MY GIRLFRIEND?
-title = Text("A SIMPLE QUESTION",
-             FONT_SIZE, COLORS["BLACK"],
-             WIDTH // 2, HEIGHT // 2 - 2 * BUTTON_HEIGHT)
+def main():
 
-yes_button = YesButton()
-no_button = NoButton()
+    pygame.init()
 
-interactive_text = InteractiveText(int(FONT_SIZE * 0.8), COLORS["WHITE"],
-                                  WIDTH // 2, HEIGHT // 2 + 2 * BUTTON_HEIGHT, no_button, MASSAGES["NO"]["TIP"])
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("PLAY ME")
 
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        else:
-            no_button.update(event)
-            yes_button.update(event)
+    # Estado atual da cena
+    current_scene = "main_scene"
 
-    screen.fill(COLORS["GHOST WHITE"])
+    # Cenas
+    SCENES = {
+        "main_scene": main_scene(),
+        "new_scene": new_scene()
+    }
 
-    title.draw(screen)
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            else:
+                if current_scene == "main_scene":
+                    SCENES["main_scene"][1].update(event)
+                    SCENES["main_scene"][2].update(event)
+                elif current_scene == "new_scene":
+                    SCENES["new_scene"][1].update(event)
 
-    no_button.draw(screen)
-    yes_button.draw(screen)
+        screen.fill(COLORS["GHOST WHITE"])
 
-    interactive_text.draw(screen)
+        if current_scene == "main_scene":
+            SCENES["main_scene"][0].draw(screen)
+            SCENES["main_scene"][1].draw(screen)
+            SCENES["main_scene"][2].draw(screen)
+            SCENES["main_scene"][3].draw(screen)
 
-    pygame.display.flip()
+            if SCENES["main_scene"][1].clicked:
+                SCENES["main_scene"][1].clicked = False # Reset the variable clicked of the "yes" button
+                current_scene = "new_scene"
 
-pygame.quit()
+        elif current_scene == "new_scene":
+            SCENES["new_scene"][0].draw(screen)
+            SCENES["new_scene"][1].draw(screen)
+
+            if SCENES["new_scene"][1].clicked:
+                SCENES["new_scene"][1].clicked = False # Reset the variable clicked of the "back" button
+                current_scene = "main_scene"
+
+        pygame.display.flip()
+
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
