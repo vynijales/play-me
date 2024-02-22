@@ -1,8 +1,9 @@
-## Widgets
+# Widgets
 import random
 
 from .base import *
 from .constants import *
+
 
 class Button:
     def __init__(self, image, rect, hover_image=None, hover=False):
@@ -11,6 +12,7 @@ class Button:
         self.rect = rect
         self.hover = hover
         self.current = self.image
+        self.clicked = False
 
     def draw(self, screen):
         if self.hover:
@@ -29,13 +31,12 @@ class YesButton(Button):
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
-        self.clicked = False
         super().__init__(self.image, self.rect, self.hover_image)
 
     def draw(self, screen):
         if COUNTER >= CHECKPOINTS[2]:
             self.rect.x = WIDTH // 2 - BUTTON_WIDTH // 2
-            
+
         return super().draw(screen)
 
     def update(self, event):
@@ -86,7 +87,8 @@ class NoButton(Button):
         global COUNTER
         if event.type == pygame.MOUSEMOTION:
             if self.rect.collidepoint(event.pos):
-                self.rect.x, self.rect.y = random.randint(0, WIDTH - BUTTON_WIDTH), random.randint(0, HEIGHT - BUTTON_HEIGHT)
+                self.rect.x, self.rect.y = random.randint(
+                    0, WIDTH - BUTTON_WIDTH), random.randint(0, HEIGHT - BUTTON_HEIGHT - 80)
                 COUNTER = COUNTER + 1
 
     def set_disable(self):
@@ -94,6 +96,7 @@ class NoButton(Button):
 
     def get_out(self):
         self.rect.x, self.rect.y = -500, -500
+
 
 class BackButton(Button):
     def __init__(self):
@@ -104,13 +107,92 @@ class BackButton(Button):
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
-        self.clicked = False
         super().__init__(self.image, self.rect)
 
     def update(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 self.clicked = True
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.clicked = False
+
+class BRButton(Button):
+    def __init__(self):
+        self.image = load_button_image("assets/br.png", (LANGUAGE_WIDTH, LANGUAGE_HEIGHT))
+        self.rect = pygame.Rect(WIDTH / 5 - LANGUAGE_WIDTH * 2, HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
+        self.language = "BR"
+        super().__init__(self.image, self.rect)
+
+    def update(self, event):
+        global CURRENT_LANGUAGE
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.rect.collidepoint(event.pos):
+                self.clicked = True
+                CURRENT_LANGUAGE = self.language
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.clicked = False
+
+class FRButton(Button):
+    def __init__(self):
+        self.image = load_button_image("assets/fr.png", (LANGUAGE_WIDTH, LANGUAGE_HEIGHT))
+        self.rect = pygame.Rect(WIDTH / 5 * 2 - LANGUAGE_WIDTH * 2, HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
+        self.language = "FR"
+        super().__init__(self.image, self.rect)
+
+    def update(self, event):
+        global CURRENT_LANGUAGE
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.rect.collidepoint(event.pos):
+                self.clicked = True
+                CURRENT_LANGUAGE = self.language
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.clicked = False
+
+class UKButton(Button):
+    def __init__(self):
+        self.image = load_button_image("assets/uk.png", (LANGUAGE_WIDTH, LANGUAGE_HEIGHT))
+        self.rect = pygame.Rect(WIDTH / 5 * 3 - LANGUAGE_WIDTH * 2, HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
+        self.language = "UK"
+        super().__init__(self.image, self.rect)
+
+    def update(self, event):
+        global CURRENT_LANGUAGE
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.rect.collidepoint(event.pos):
+                self.clicked = True
+                CURRENT_LANGUAGE = self.language
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.clicked = False
+
+class ESButton(Button):
+    def __init__(self):
+        self.image = load_button_image("assets/es.png", (LANGUAGE_WIDTH, LANGUAGE_HEIGHT))
+        self.rect = pygame.Rect(WIDTH / 5 * 4 - LANGUAGE_WIDTH * 2, HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
+        self.language = "ES"
+        super().__init__(self.image, self.rect)
+
+    def update(self, event):
+        global CURRENT_LANGUAGE
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.rect.collidepoint(event.pos):
+                self.clicked = True
+                CURRENT_LANGUAGE = self.language
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.clicked = False
+
+class KRButton(Button):
+    def __init__(self):
+        self.image = load_button_image("assets/kr.png", (LANGUAGE_WIDTH, LANGUAGE_HEIGHT))
+        self.rect = pygame.Rect(WIDTH / 5 * 5 - LANGUAGE_WIDTH * 2, HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
+        self.language = "KR"
+        super().__init__(self.image, self.rect)
+
+    def update(self, event):
+        global CURRENT_LANGUAGE
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.rect.collidepoint(event.pos):
+                self.clicked = True
+                CURRENT_LANGUAGE = self.language
         elif event.type == pygame.MOUSEBUTTONUP:
             self.clicked = False
 
@@ -124,6 +206,18 @@ class Text:
     def draw(self, screen):
         screen.blit(self.text, self.rect)
 
+
+class Title(Text):
+    def __init__(self, font_size, color, x, y, text=""):
+        super().__init__(text, font_size, color, x, y)
+
+    def draw(self, screen):
+        self.rect.x = WIDTH // 2 - self.text.get_width() // 2
+        self.rect.y = HEIGHT // 2 - 2 * BUTTON_HEIGHT
+        self.text = self.font.render(MASSAGES[CURRENT_LANGUAGE]["TITLE"], True, COLORS["BLACK"])
+        screen.blit(self.text, self.rect)
+
+
 class InteractiveText(Text):
     def __init__(self, font_size, color, x, y, object, text=""):
         super().__init__(text, font_size, color, x, y)
@@ -136,14 +230,17 @@ class InteractiveText(Text):
         self.rect.y = HEIGHT // 2 + 2 * BUTTON_HEIGHT
 
         if COUNTER >= CHECKPOINTS[2]:
-            self.text = self.font.render(MASSAGES["NO"]["END"], True, COLORS["BLACK"])
+            self.text = self.font.render(
+                MASSAGES[CURRENT_LANGUAGE]["NO"]["END"], True, COLORS["BLACK"])
             self.object.get_out()
 
         elif COUNTER >= CHECKPOINTS[1]:
-            self.text = self.font.render(MASSAGES["NO"]["DISABLE"], True, COLORS["BLACK"])
+            self.text = self.font.render(
+                MASSAGES[CURRENT_LANGUAGE]["NO"]["DISABLE"], True, COLORS["BLACK"])
 
         elif COUNTER >= CHECKPOINTS[0]:
-            self.text = self.font.render(MASSAGES["NO"]["TIP"], True, COLORS["BLACK"])
+            self.text = self.font.render(
+                MASSAGES[CURRENT_LANGUAGE]["NO"]["TIP"], True, COLORS["BLACK"])
             self.object.set_disable()
         else:
             self.text = self.font.render("", True, COLORS["WHITE"])

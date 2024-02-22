@@ -34,6 +34,11 @@ def main():
                 if current_scene == "main_scene":
                     SCENES["main_scene"][1].update(event)
                     SCENES["main_scene"][2].update(event)
+                    SCENES["main_scene"][4].update(event)
+                    SCENES["main_scene"][5].update(event)
+                    SCENES["main_scene"][6].update(event)
+                    SCENES["main_scene"][7].update(event)
+                    SCENES["main_scene"][8].update(event)
                 elif current_scene == "new_scene":
                     SCENES["new_scene"][1].update(event)
 
@@ -44,9 +49,15 @@ def main():
             SCENES["main_scene"][1].draw(screen)
             SCENES["main_scene"][2].draw(screen)
             SCENES["main_scene"][3].draw(screen)
+            SCENES["main_scene"][4].draw(screen)
+            SCENES["main_scene"][5].draw(screen)
+            SCENES["main_scene"][6].draw(screen)
+            SCENES["main_scene"][7].draw(screen)
+            SCENES["main_scene"][8].draw(screen)
 
             if SCENES["main_scene"][1].clicked:
-                SCENES["main_scene"][1].clicked = False # Reset the variable clicked of the "yes" button
+                # Reset the variable clicked of the "yes" button
+                SCENES["main_scene"][1].clicked = False
                 current_scene = "new_scene"
 
         elif current_scene == "new_scene":
@@ -54,12 +65,14 @@ def main():
             SCENES["new_scene"][1].draw(screen)
 
             if SCENES["new_scene"][1].clicked:
-                SCENES["new_scene"][1].clicked = False # Reset the variable clicked of the "back" button
+                # Reset the variable clicked of the "back" button
+                SCENES["new_scene"][1].clicked = False
                 current_scene = "main_scene"
 
         pygame.display.flip()
 
     pygame.quit()
+
 
 if __name__ == "__main__":
     main()

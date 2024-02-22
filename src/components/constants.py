@@ -1,7 +1,9 @@
 WIDTH, HEIGHT = 640, 480
 FONT_SIZE = 32
 BUTTON_WIDTH, BUTTON_HEIGHT = 128, 64
+LANGUAGE_WIDTH, LANGUAGE_HEIGHT = 48, 48
 MARGIN = 100
+MARGIN_FOOTER = 60
 
 CHECKPOINTS = [10, 15, 20]
 
@@ -18,9 +20,44 @@ COLORS = {
 }
 
 MASSAGES = {
-    "NO" : {
-        "TIP": "I think you're trying to press the wrong button",
-        "DISABLE": "Ok... I'll help you",
-        "END": "That's better!"
-    }
+    "BR": {
+        "TITLE": "UMA PERGUNTA SIMPLES",
+        "NO": {
+            "TIP": "Acho que você está tentando pressionar o botão errado",
+            "DISABLE": "Ok... Eu vou te ajudar",
+            "END": "Isso é melhor!"
+        }
+    },
+    "UK": {
+        "TITLE": "A SIMPLE QUESTION",
+        "NO": {
+            "TIP": "I think you're trying to press the wrong button",
+            "DISABLE": "Ok... I'll help you",
+            "END": "That's better!"
+        }
+    },
+    "FR": {
+        "TITLE": "UNE QUESTION SIMPLE",
+        "NO": {
+            "TIP": "Je pense que vous essayez d'appuyer sur le mauvais bouton",
+            "DISABLE": "D'accord... Je vais vous aider",
+            "END": "C'est mieux!"
+        }
+    },
+    "ES": {
+        "TITLE": "UNA PREGUNTA SIMPLE",
+        "NO": {
+            "TIP": "Creo que estás intentando presionar el botón equivocado",
+            "DISABLE": "Ok... Te ayudaré",
+            "END": "¡Eso es mejor!"
+        }
+    },
+    "KR": {
+        "TITLE": "간단한 질문",
+        "NO": {
+            "TIP": "나는 당신이 잘못된 버튼을 누르려고 하는 것 같다고 생각해요",
+            "DISABLE": "좋아요... 도와 드릴게요",
+            "END": "더 좋아요!"
+        }
+    },
 }
