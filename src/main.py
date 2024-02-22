@@ -10,20 +10,16 @@ pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("PLAY ME")
 
-title = Text("DO YOU WANNA BE MY GIRLFRIEND?",
+# DO YOU WANNA BE MY GIRLFRIEND?
+title = Text("A SIMPLE QUESTION",
              FONT_SIZE, COLORS["BLACK"],
              WIDTH // 2, HEIGHT // 2 - 2 * BUTTON_HEIGHT)
 
 yes_button = YesButton()
 no_button = NoButton()
 
-interactive_text = InteractiveText("I think you're trying to press the wrong button",
-                                  int(FONT_SIZE * 0.8), COLORS["WHITE"],
-                                  WIDTH // 2, HEIGHT // 2 + 2 * BUTTON_HEIGHT, no_button, 5)
-
-interactive_text2 = InteractiveText("Ok... I'll help you",
-                                    int(FONT_SIZE * 0.8), COLORS["WHITE"],
-                                    WIDTH // 2, HEIGHT // 2 + 2 * BUTTON_HEIGHT + 20, no_button, 10, True)
+interactive_text = InteractiveText(int(FONT_SIZE * 0.8), COLORS["WHITE"],
+                                  WIDTH // 2, HEIGHT // 2 + 2 * BUTTON_HEIGHT, no_button, MASSAGES["NO"]["TIP"])
 
 running = True
 while running:
@@ -41,7 +37,6 @@ while running:
     no_button.draw(screen)
 
     interactive_text.draw(screen)
-    interactive_text2.draw(screen)
 
     pygame.display.flip()
 

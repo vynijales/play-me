@@ -2,6 +2,8 @@ import pygame
 
 from .constants import *
 
+COUNTER = 0
+
 def load_button_image(path: str):
     image = pygame.image.load(path).convert_alpha()
     return pygame.transform.scale(image, (BUTTON_WIDTH, BUTTON_HEIGHT))

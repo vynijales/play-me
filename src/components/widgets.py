@@ -19,29 +19,32 @@ class YesButton(Button):
         rect = pygame.Rect(WIDTH // 2 - BUTTON_WIDTH // 2 - MARGIN, HEIGHT // 2 - BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT)
         super().__init__(image, rect)
 
+    def draw(self, screen):
+        if COUNTER >= CHECKPOINTS[2]:
+            self.rect.x = self.rect.x = WIDTH // 2 - BUTTON_WIDTH // 2
+
+        return super().draw(screen)
+
 
 class NoButton(Button):
     def __init__(self):
-        self._contador = 0
         self.disable = False
         image = load_button_image("assets/NO.png")
         rect = pygame.Rect(WIDTH // 2 - BUTTON_WIDTH // 2 + MARGIN, HEIGHT // 2 - BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT)
         super().__init__(image, rect)
 
     def update(self, event):
+        global COUNTER
         if event.type == pygame.MOUSEMOTION:
             if self.rect.collidepoint(event.pos):
                 self.rect.x, self.rect.y = random.randint(0, WIDTH - BUTTON_WIDTH), random.randint(0, HEIGHT - BUTTON_HEIGHT)
-                self._contador += 1
+                COUNTER = COUNTER + 1
 
     def set_disable(self):
         self.image = load_button_image("assets/NO_DISABLE.png")
 
     def get_out(self):
         self.rect.x, self.rect.y = -500, -500
-
-    def get_contador(self):
-        return self._contador
 
 class Text:
     def __init__(self, text, font_size, color, x, y):
@@ -54,17 +57,32 @@ class Text:
         screen.blit(self.text, self.rect)
 
 class InteractiveText(Text):
-    def __init__(self, text, font_size, color, x, y, object, min_contador=10, disable=False):
+
+    def __init__(self, font_size, color, x, y, object, text = ""):
         super().__init__(text, font_size, color, x, y)
         self.object = object
-        self.min_contador = min_contador
-        self.disable = disable
 
     def draw(self, screen):
-        if self.object.get_contador() >= self.min_contador:
-            self.text = self.font.render(self.massage, True, COLORS["BLACK"])
-            screen.blit(self.text, self.rect)
-            self.object.set_disable()
+        global COUNTER
 
-            if self.disable and self.object.get_contador() >= self.min_contador + 5:
-                self.object.get_out()
+        self.rect.x = WIDTH // 2 - self.text.get_width() // 2
+        self.rect.y = HEIGHT // 2 + 2 * BUTTON_HEIGHT
+
+        
+        if COUNTER >= CHECKPOINTS[2]:
+            self.text = self.font.render(MASSAGES["NO"]["END"], True, COLORS["BLACK"])
+            self.object.get_out()
+        
+        elif COUNTER >= CHECKPOINTS[1]:
+            self.text = self.font.render(MASSAGES["NO"]["DISABLE"], True, COLORS["BLACK"])
+        
+        elif COUNTER >= CHECKPOINTS[0]:
+            self.text = self.font.render(MASSAGES["NO"]["TIP"], True, COLORS["BLACK"])
+            self.object.set_disable()
+        else:
+            self.text = self.font.render("", True, COLORS["WHITE"])
+        screen.blit(self.text, self.rect)
+
+    def __init__(self, font_size, color, x, y, object, text = ""):
+        super().__init__(text, font_size, color, x, y)
+        self.object = object
