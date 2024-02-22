@@ -6,37 +6,47 @@ from .constants import *
 
 
 class Button:
-    def __init__(self, image, rect, hover_image=None, hover=False):
+    def __init__(self, image, rect, hover_image=None, hover=False, text=""):
         self.image = image
-        self.hover_image = hover_image
         self.rect = rect
+        self.hover_image = hover_image
         self.hover = hover
-        self.current = self.image
+        self.text = text
         self.clicked = False
 
     def draw(self, screen):
-        if self.hover:
+        if self.hover and self.hover_image:
             screen.blit(self.hover_image, self.rect)
         else:
             screen.blit(self.image, self.rect)
+        if self.text:
+            font = pygame.font.SysFont("Arial", 16)
+            text_surface = font.render(self.text, True, (255, 255, 255))
+            text_rect = text_surface.get_rect(center=self.rect.center)
+            screen.blit(text_surface, text_rect)
 
 class YesButton(Button):
     def __init__(self):
-        self.image = load_button_image("assets/YES.png")
-        self.hover_image = load_button_image("assets/YES_HOVER.png")
         self.rect = pygame.Rect(
             WIDTH // 2 - BUTTON_WIDTH // 2 - MARGIN,
             HEIGHT // 2 - BUTTON_HEIGHT,
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
-        super().__init__(self.image, self.rect, self.hover_image)
+        self.image = load_button_image("assets/YES.png")
+        self.hover_image = load_button_image("assets/YES_HOVER.png")
+        super().__init__(self.image, self.rect, self.hover_image, text="YES")
 
     def draw(self, screen):
         if COUNTER >= CHECKPOINTS[2]:
             self.rect.x = WIDTH // 2 - BUTTON_WIDTH // 2
 
-        return super().draw(screen)
+        if self.hover:
+            screen.blit(self.hover_image, self.rect)
+            Text(MASSAGES[CURRENT_LANGUAGE]["YES"], FONT_SIZE, COLORS["WHITE"], self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
+        else:
+            screen.blit(self.image, self.rect)
+            Text(MASSAGES[CURRENT_LANGUAGE]["YES"], FONT_SIZE, COLORS["WHITE"], self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
 
     def update(self, event):
         if event.type == pygame.MOUSEMOTION:
@@ -52,14 +62,14 @@ class YesButton(Button):
 class NoButton(Button):
     def __init__(self):
         self.disable = False
-        self.image = load_button_image("assets/NO.png")
         self.rect = pygame.Rect(
             WIDTH // 2 - BUTTON_WIDTH // 2 + MARGIN,
             HEIGHT // 2 - BUTTON_HEIGHT,
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
-        super().__init__(self.image, self.rect)
+        self.image = load_button_image("assets/NO.png")
+        super().__init__(self.image, self.rect, text="NO")
 
     def update(self, event):
         global COUNTER
@@ -69,6 +79,14 @@ class NoButton(Button):
                     0, WIDTH - BUTTON_WIDTH), random.randint(0, HEIGHT - BUTTON_HEIGHT - 80)
                 COUNTER = COUNTER + 1
 
+    def draw(self, screen):
+        if self.hover:
+            screen.blit(self.hover_image, self.rect)
+            Text(MASSAGES[CURRENT_LANGUAGE]["NO"]["DEFAULT"], FONT_SIZE, COLORS["WHITE"], self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
+        else:
+            screen.blit(self.image, self.rect)
+            Text(MASSAGES[CURRENT_LANGUAGE]["NO"]["DEFAULT"], FONT_SIZE, COLORS["WHITE"], self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
+
     def set_disable(self):
         self.image = load_button_image("assets/NO_DISABLE.png")
 
@@ -77,13 +95,13 @@ class NoButton(Button):
 
 class BackButton(Button):
     def __init__(self):
-        self.image = load_button_image("assets/NO.png")
         self.rect = pygame.Rect(
             WIDTH // 2 - BUTTON_WIDTH // 2 + MARGIN,
             HEIGHT // 2 - BUTTON_HEIGHT,
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
+        self.image = load_button_image("assets/NO.png")
         super().__init__(self.image, self.rect)
 
     def update(self, event):
