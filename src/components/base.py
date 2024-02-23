@@ -4,9 +4,10 @@ import random
 from .constants import *
 
 COUNTER = 0
-CURRENT_LANGUAGE = random.choice(["BR", "UK", "FR",  "ES"])
+CURRENT_LANGUAGE = random.choice(["BR", "UK", "FR",  "ES", "KR"])
 
-def load_button_image(path: str, scale = (BUTTON_WIDTH, BUTTON_HEIGHT)):
+
+def load_button_image(path: str, scale=(BUTTON_WIDTH, BUTTON_HEIGHT)):
     image = pygame.image.load(path).convert_alpha()
     return pygame.transform.scale(image, scale)
 

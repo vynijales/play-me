@@ -16,6 +16,7 @@ def main():
 
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("PLAY ME")
+    pygame.font.init()
 
     # Estado atual da cena
     current_scene = "initial_scene"
@@ -25,10 +26,11 @@ def main():
         "initial_scene": initial_scene(),
         "main_scene": main_scene(),
         "new_scene": new_scene(),
-        "last_scene": last_scene(), 
+        "last_scene": last_scene(),
     }
 
-    language_buttons = [BRButton(), FRButton(), UKButton(), ESButton(), KRButton()]
+    language_buttons = [BRButton(), FRButton(), UKButton(),
+                        ESButton(), KRButton()]
 
     running = True
     while running:
@@ -36,9 +38,9 @@ def main():
             if event.type == pygame.QUIT:
                 if current_scene == "last_scene" or current_scene == "initial_scene":
                     running = False
-            
+
             if current_scene == "main_scene":
-                for i in range(1, 4):
+                for i in range(4):
                     SCENES["main_scene"][i].update(event)
 
             elif current_scene == "new_scene":
@@ -75,6 +77,7 @@ def main():
         elif current_scene == "initial_scene":
             if pygame.time.get_ticks() > 5000:
                 current_scene = "main_scene"
+            SCENES["initial_scene"].update(event)
             SCENES["initial_scene"].draw(screen)
 
         elif current_scene == "last_scene":
@@ -82,9 +85,8 @@ def main():
                 text.draw(screen)
 
             for i in range(2):
+                SCENES["last_scene"][i].update(event)
                 SCENES["last_scene"][i].draw(screen)
-
-
 
         for button in language_buttons:
             button.draw(screen)

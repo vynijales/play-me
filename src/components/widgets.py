@@ -20,7 +20,12 @@ class Button:
         else:
             screen.blit(self.image, self.rect)
         if self.text:
-            font = pygame.font.SysFont("Arial", 16)
+            if CURRENT_LANGUAGE == "KR":
+                font = pygame.font.Font(
+                    "assets/font/AlibabaSansKR-Regular.ttf", 12)
+            else:
+                font = pygame.font.Font(None, 16)
+
             text_surface = font.render(self.text, True, (255, 255, 255))
             text_rect = text_surface.get_rect(center=self.rect.center)
             screen.blit(text_surface, text_rect)
@@ -236,18 +241,27 @@ class KRButton(LanguageButton):
 
 class Text:
     def __init__(self, text, font_size, color, x, y):
-        self.font = pygame.font.Font(None, font_size)
+        if CURRENT_LANGUAGE == "KR":
+            self.font = pygame.font.Font(
+                "assets/font/AlibabaSansKR-Regular.ttf", font_size)
+        else:
+            self.font = pygame.font.Font(None, font_size)
         self.text = self.font.render(text, True, color)
         self.rect = self.text.get_rect(center=(x, y))
         self.massage = text
         self.color = color
+        self.font_size = font_size
 
     def draw(self, screen):
         self.text = self.font.render(self.massage, True, self.color)
         screen.blit(self.text, self.rect)
 
     def update(self, event):
-        pass
+        if CURRENT_LANGUAGE == "KR":
+            self.font = pygame.font.Font(
+                "assets/font/AlibabaSansKR-Regular.ttf", int(self.font_size * 0.85))
+        else:
+            self.font = pygame.font.Font(None, self.font_size)
 
 
 class InitialText(Text):
