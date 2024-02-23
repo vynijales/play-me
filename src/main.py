@@ -7,7 +7,7 @@ from components.constants import *
 
 from scenes.main_scene import main_scene
 from scenes.new_scene import new_scene
-from scenes.initial_scene import initial_scene
+from scenes.first_scene import first_scene
 from scenes.last_scene import last_scene
 
 
@@ -19,11 +19,11 @@ def main():
     pygame.font.init()
 
     # Estado atual da cena
-    current_scene = "initial_scene"
+    current_scene = "first_scene"
 
     # Cenas
     SCENES = {
-        "initial_scene": initial_scene(),
+        "first_scene": first_scene(),
         "main_scene": main_scene(),
         "new_scene": new_scene(),
         "last_scene": last_scene(),
@@ -36,11 +36,12 @@ def main():
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                if current_scene == "last_scene" or current_scene == "initial_scene":
+                if current_scene == "last_scene" or current_scene == "first_scene":
                     running = False
 
             if current_scene == "main_scene":
                 for i in range(4):
+                    SCENES["main_scene"][i].update(event)
                     SCENES["main_scene"][i].update(event)
 
             elif current_scene == "new_scene":
@@ -59,7 +60,7 @@ def main():
 
             if SCENES["main_scene"][1].clicked:
                 SCENES["main_scene"][1].clicked = False
-                current_scene = "new_scene"
+                current_scene = "last_scene"
 
         elif current_scene == "new_scene":
             for i in range(4):
@@ -74,16 +75,13 @@ def main():
                 SCENES["new_scene"][3].clicked = False
                 current_scene = "main_scene"
 
-        elif current_scene == "initial_scene":
+        elif current_scene == "first_scene":
             if pygame.time.get_ticks() > 5000:
                 current_scene = "main_scene"
-            SCENES["initial_scene"].update(event)
-            SCENES["initial_scene"].draw(screen)
+            SCENES["first_scene"].update(event)
+            SCENES["first_scene"].draw(screen)
 
         elif current_scene == "last_scene":
-            for text in SCENES["last_scene"][2]:
-                text.draw(screen)
-
             for i in range(2):
                 SCENES["last_scene"][i].update(event)
                 SCENES["last_scene"][i].draw(screen)

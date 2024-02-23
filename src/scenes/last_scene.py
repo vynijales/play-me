@@ -4,16 +4,10 @@ from components.constants import *
 import random
 
 
-def random_color():
-    return (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-
-
 def last_scene():
-    title = Text("FERNANDA INACIO DE LIMA", int(FONT_SIZE * 1.5),
-                 COLORS["BLACK"], WIDTH // 2, MARGIN)
-    title2 = LoveYouText(
-        FONT_SIZE * 2, COLORS["DARK PURPLE"], WIDTH // 2 - MARGIN * 1.4, HEIGHT // 2 - MARGIN)
+    love_text = LoveYouText(
+        FONT_SIZE * 2, COLORS["DARK PURPLE"], WIDTH // 2, MARGIN // 2)
 
-    lista = []
+    image = Image("assets/vaso.png", (300, 300), WIDTH // 2, HEIGHT // 2)
 
-    return title, title2, lista
+    return love_text, image

@@ -26,13 +26,20 @@ COLORS = {
     "DISABLED_HOVER": (100, 100, 100),
     "BACK": (0, 0, 255),
     "BACK_HOVER": (0, 0, 200),
+
+
+    "BR": (0, 0, 255),
+    "UK": (255, 0, 0),
+    "FR": (255, 255, 0),
+    "ES": (0, 255, 0),
+    "KR": (255, 0, 255)
 }
 
 MESSAGES = {
     "BR": {
         "SALUTATION": "de Matheus para VIDA",
         "INITIAL": "INICIAR",
-        "TITLE": "Quer namoral comigo?",
+        "TITLE": "Quer ser minha namorada?",
         "YES": "SIM",
         "NO": {
             "DEFAULT": "NÃO",
@@ -47,7 +54,7 @@ MESSAGES = {
     "UK": {
         "SALUTATION": "from Matheus to LIFE",
         "INITIAL": "START",
-        "TITLE": "Do you want to date me?",
+        "TITLE": "Do you want to be my girlfriend?",
         "YES": "YES",
         "NO": {
             "DEFAULT": "NO",
@@ -62,7 +69,7 @@ MESSAGES = {
     "FR": {
         "SALUTATION": "de Matheus pour la VIE",
         "INITIAL": "COMMENCER",
-        "TITLE": "Veux-tu sortir avec moi?",
+        "TITLE": "Veux-tu être ma copine?",
         "YES": "OUI",
         "NO": {
             "DEFAULT": "NON",
@@ -77,7 +84,7 @@ MESSAGES = {
     "ES": {
         "SALUTATION": "de Matheus para la VIDA",
         "INITIAL": "COMENZAR",
-        "TITLE": "¿Quieres salir conmigo?",
+        "TITLE": "¿Quieres ser mi novia?",
         "YES": "SÍ",
         "NO": {
             "DEFAULT": "NO",
@@ -92,7 +99,7 @@ MESSAGES = {
     "KR": {
         "SALUTATION": "마테우스의 삶에 대한 질문",
         "INITIAL": "시작",
-        "TITLE": "나랑 데이트할래?",
+        "TITLE": "여자친구가 되고 싶니?",
         "YES": "예",
         "NO": {
             "DEFAULT": "아니요",

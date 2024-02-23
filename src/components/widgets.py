@@ -242,8 +242,7 @@ class KRButton(LanguageButton):
 class Text:
     def __init__(self, text, font_size, color, x, y):
         if CURRENT_LANGUAGE == "KR":
-            self.font = pygame.font.Font(
-                "assets/font/AlibabaSansKR-Regular.ttf", font_size)
+            self.font = pygame.font.Font("assets/font/AlibabaSansKR-Regular.ttf", font_size)
         else:
             self.font = pygame.font.Font(None, font_size)
         self.text = self.font.render(text, True, color)
@@ -262,7 +261,11 @@ class Text:
                 "assets/font/AlibabaSansKR-Regular.ttf", int(self.font_size * 0.85))
         else:
             self.font = pygame.font.Font(None, self.font_size)
+        
+        self.color = COLORS[CURRENT_LANGUAGE]
 
+    def center_x(self):
+        self.rect.x = WIDTH // 2 - self.text.get_width() // 2
 
 class InitialText(Text):
     def __init__(self, font_size, color, x, y, text=""):
@@ -349,7 +352,20 @@ class LoveYouText(Text):
 
     def draw(self, screen):
         self.rect.x, self.rect.y = (
-            WIDTH - self.text.get_width()) // 2, (HEIGHT - self.text.get_height()) // 2
+            WIDTH - self.text.get_width()) // 2, MARGIN_FOOTER // 2
         self.text = self.font.render(
             MESSAGES[CURRENT_LANGUAGE]["LOVE"], True, COLORS["BLACK"])
         screen.blit(self.text, self.rect)
+
+
+class Image:
+    def __init__(self, path, scale, x, y):
+        self.image = pygame.image.load(path).convert_alpha()
+        self.image = pygame.transform.scale(self.image, scale)
+        self.rect = self.image.get_rect(center=(x, y))
+
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)
+    
+    def update(self, event):
+        pass
