@@ -8,6 +8,7 @@ from components.constants import *
 from scenes.main_scene import main_scene
 from scenes.new_scene import new_scene
 from scenes.initial_scene import initial_scene
+from scenes.last_scene import last_scene
 
 
 def main():
@@ -23,7 +24,8 @@ def main():
     SCENES = {
         "initial_scene": initial_scene(),
         "main_scene": main_scene(),
-        "new_scene": new_scene()
+        "new_scene": new_scene(),
+        "last_scene": last_scene(), 
     }
 
     language_buttons = [BRButton(), FRButton(), UKButton(), ESButton(), KRButton()]
@@ -32,7 +34,7 @@ def main():
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                if current_scene != "main_scene":
+                if current_scene == "last_scene":
                     running = False
             else:
                 if current_scene == "main_scene":
@@ -62,6 +64,11 @@ def main():
             for i in range(4):
                 SCENES["new_scene"][i].draw(screen)
 
+            if SCENES["new_scene"][2].clicked:
+                # Reset the variable clicked of the "yes" button
+                SCENES["new_scene"][2].clicked = False
+                current_scene = "last_scene"
+
             if SCENES["new_scene"][3].clicked:
                 # Reset the variable clicked of the "back" button
                 SCENES["new_scene"][3].clicked = False
@@ -71,6 +78,13 @@ def main():
             if pygame.time.get_ticks() > 5000:
                 current_scene = "main_scene"
             SCENES["initial_scene"].draw(screen)
+
+        elif current_scene == "last_scene":
+            for text in SCENES["last_scene"][2]:
+                text.draw(screen)
+
+            for i in range(2):
+                SCENES["last_scene"][i].draw(screen)
 
 
 

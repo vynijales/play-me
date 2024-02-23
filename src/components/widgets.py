@@ -218,9 +218,10 @@ class Text:
         self.text = self.font.render(text, True, color)
         self.rect = self.text.get_rect(center=(x, y))
         self.massage = text
+        self.color = color
 
     def draw(self, screen):
-        self.text = self.font.render(self.massage, True, COLORS["BLACK"])
+        self.text = self.font.render(self.massage, True, self.color)
         screen.blit(self.text, self.rect)
 
     def update(self, event):
@@ -296,4 +297,13 @@ class LastChanceText(Text):
     def draw(self, screen):
         self.rect.x, self.rect.y = WIDTH // 2 - self.text.get_width() // 2, HEIGHT // 2 + 2 * BUTTON_HEIGHT
         self.text = self.font.render(MESSAGES[CURRENT_LANGUAGE]["LAST"], True, COLORS["BLACK"])
+        screen.blit(self.text, self.rect)
+
+class LoveYouText(Text):
+    def __init__(self, font_size, color, x, y, text=""):
+        super().__init__(text, font_size, color, x, y)
+
+    def draw(self, screen):
+        self.rect.x, self.rect.y = (WIDTH - self.text.get_width()) // 2, (HEIGHT - self.text.get_height()) // 2
+        self.text = self.font.render(MESSAGES[CURRENT_LANGUAGE]["LOVE"], True, COLORS["BLACK"])
         screen.blit(self.text, self.rect)

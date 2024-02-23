@@ -32,7 +32,7 @@ MESSAGES = {
     "BR": {
         "SALUTATION": "de Matheus para VIDA",
         "INITIAL": "INICIAR",
-        "TITLE": "UMA PERGUNTA SIMPLES",
+        "TITLE": "Quer namoral comigo?",
         "YES": "SIM",
         "NO": {
             "DEFAULT": "NÃO",
@@ -41,12 +41,13 @@ MESSAGES = {
             "END": "Assim está melhor!"
         },
         "LAST": "Última chance de mudar de ideia!",
-        "CONFIRM": "Você tem certeza?"
+        "CONFIRM": "Você tem certeza?",
+        "LOVE": "EU TE AMO!"
     },
     "UK": {
         "SALUTATION": "from Matheus to LIFE",
         "INITIAL": "START",
-        "TITLE": "A SIMPLE QUESTION",
+        "TITLE": "Do you want to date me?",
         "YES": "YES",
         "NO": {
             "DEFAULT": "NO",
@@ -55,12 +56,13 @@ MESSAGES = {
             "END": "That's better!"
         },
         "LAST": "Last chance to change your mind!",
-        "CONFIRM": "Are you sure?"
+        "CONFIRM": "Are you sure?",
+        "LOVE": "I LOVE YOU!"
     },
     "FR": {
         "SALUTATION": "de Matheus pour la VIE",
         "INITIAL": "COMMENCER",
-        "TITLE": "UNE QUESTION SIMPLE",
+        "TITLE": "Veux-tu sortir avec moi",
         "YES": "OUI",
         "NO": {
             "DEFAULT": "NON",
@@ -69,12 +71,13 @@ MESSAGES = {
             "END": "C'est mieux!"
         },
         "LAST": "Dernière chance de changer d'avis!",
-        "CONFIRM": "Êtes-vous sûr?"
+        "CONFIRM": "Êtes-vous sûr?",
+        "LOVE": "JE T'AIME!"
     },
     "ES": {
         "SALUTATION": "de Matheus para la VIDA",
         "INITIAL": "COMENZAR",
-        "TITLE": "UNA PREGUNTA SIMPLE",
+        "TITLE": "¿Quieres salir conmigo?",
         "YES": "SÍ",
         "NO": {
             "DEFAULT": "NO",
@@ -83,12 +86,13 @@ MESSAGES = {
             "END": "¡Así es mejor!"
         },
         "LAST": "¡Última oportunidad de cambiar de opinión!",
-        "CONFIRM": "¿Estás seguro?"
+        "CONFIRM": "¿Estás seguro?",
+        "LOVE": "¡TE AMO!"
     },
     "KR": {
         "SALUTATION": "마테우스의 삶에 대한 질문",
         "INITIAL": "시작",
-        "TITLE": "간단한 질문",
+        "TITLE": "나랑 데이트할래?",
         "YES": "예",
         "NO": {
             "DEFAULT": "아니요",
@@ -97,6 +101,7 @@ MESSAGES = {
             "END": "그게 낫다!"
         },
         "LAST": "마음을 바꿀 마지막 기회입니다!",
-        "CONFIRM": "확실합니까?"
+        "CONFIRM": "확실합니까?",
+        "LOVE": "사랑해!"
     },
 }
