@@ -28,7 +28,7 @@ COLORS = {
     "BACK_HOVER": (0, 0, 200),
 }
 
-MASSAGES = {
+MESSAGES = {
     "BR": {
         "TITLE": "UMA PERGUNTA SIMPLES",
         "YES": "SIM",
@@ -36,8 +36,9 @@ MASSAGES = {
             "DEFAULT": "NÃO",
             "TIP": "Acho que você está tentando pressionar o botão errado",
             "DISABLE": "Ok... Eu vou te ajudar",
-            "END": "Isso é melhor!"
-        }
+            "END": "Assim é melhor!"
+        },
+        "CONFIRM": "Você tem certeza?"
     },
     "UK": {
         "TITLE": "A SIMPLE QUESTION",
@@ -47,7 +48,8 @@ MASSAGES = {
             "TIP": "I think you're trying to press the wrong button",
             "DISABLE": "Ok... I'll help you",
             "END": "That's better!"
-        }
+        },
+        "CONFIRM": "Are you sure?"
     },
     "FR": {
         "TITLE": "UNE QUESTION SIMPLE",
@@ -57,7 +59,8 @@ MASSAGES = {
             "TIP": "Je pense que vous essayez d'appuyer sur le mauvais bouton",
             "DISABLE": "D'accord... Je vais vous aider",
             "END": "C'est mieux!"
-        }
+        },
+        "CONFIRM": "Êtes-vous sûr?"
     },
     "ES": {
         "TITLE": "UNA PREGUNTA SIMPLE",
@@ -66,8 +69,9 @@ MASSAGES = {
             "DEFAULT": "NO",
             "TIP": "Creo que estás intentando presionar el botón equivocado",
             "DISABLE": "Ok... Te ayudaré",
-            "END": "¡Eso es mejor!"
-        }
+            "END": "¡Así es mejor!"
+        },
+        "CONFIRM": "¿Estás seguro?"
     },
     "KR": {
         "TITLE": "간단한 질문",
@@ -76,7 +80,8 @@ MASSAGES = {
             "DEFAULT": "아니요",
             "TIP": "나는 당신이 잘못된 버튼을 누르려고 하는 것 같다고 생각해요",
             "DISABLE": "좋아요... 도와 드릴게요",
-            "END": "더 좋아요!"
-        }
+            "END": "그게 낫다!"
+        },
+        "CONFIRM": "확실합니까?"
     },
 }

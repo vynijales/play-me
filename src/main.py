@@ -10,7 +10,6 @@ from scenes.new_scene import new_scene
 
 
 def main():
-
     pygame.init()
 
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -25,39 +24,31 @@ def main():
         "new_scene": new_scene()
     }
 
+    language_buttons = [BRButton(), FRButton(), UKButton(), ESButton(), KRButton()]
+
     running = True
     while running:
         for event in pygame.event.get():
-            global COUNTER
-
             if event.type == pygame.QUIT:
                 if current_scene != "main_scene":
                     running = False
-                
             else:
                 if current_scene == "main_scene":
-                    SCENES["main_scene"][1].update(event)
-                    SCENES["main_scene"][2].update(event)
-                    SCENES["main_scene"][4].update(event)
-                    SCENES["main_scene"][5].update(event)
-                    SCENES["main_scene"][6].update(event)
-                    SCENES["main_scene"][7].update(event)
-                    SCENES["main_scene"][8].update(event)
+                    for i in range(1, 4):
+                        SCENES["main_scene"][i].update(event)
                 elif current_scene == "new_scene":
-                    SCENES["new_scene"][1].update(event)
+                    SCENES["new_scene"][2].update(event)
+                    SCENES["new_scene"][3].update(event)
+            
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for button in language_buttons:
+                    button.update(event)
 
         screen.fill(COLORS["GHOST WHITE"])
 
         if current_scene == "main_scene":
-            SCENES["main_scene"][0].draw(screen)
-            SCENES["main_scene"][1].draw(screen)
-            SCENES["main_scene"][2].draw(screen)
-            SCENES["main_scene"][3].draw(screen)
-            SCENES["main_scene"][4].draw(screen)
-            SCENES["main_scene"][5].draw(screen)
-            SCENES["main_scene"][6].draw(screen)
-            SCENES["main_scene"][7].draw(screen)
-            SCENES["main_scene"][8].draw(screen)
+            for i in range(4):
+                SCENES["main_scene"][i].draw(screen)
 
             if SCENES["main_scene"][1].clicked:
                 # Reset the variable clicked of the "yes" button
@@ -65,13 +56,17 @@ def main():
                 current_scene = "new_scene"
 
         elif current_scene == "new_scene":
-            SCENES["new_scene"][0].draw(screen)
-            SCENES["new_scene"][1].draw(screen)
+            for i in range(4):
+                SCENES["new_scene"][i].draw(screen)
 
-            if SCENES["new_scene"][1].clicked:
+            if SCENES["new_scene"][3].clicked:
                 # Reset the variable clicked of the "back" button
-                SCENES["new_scene"][1].clicked = False
+                SCENES["new_scene"][3].clicked = False
                 current_scene = "main_scene"
+                print("Back to main scene")
+
+        for button in language_buttons:
+            button.draw(screen)
 
         pygame.display.flip()
 
