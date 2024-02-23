@@ -30,17 +30,22 @@ COLORS = {
 
 MESSAGES = {
     "BR": {
+        "SALUTATION": "de Matheus para VIDA",
+        "INITIAL": "INICIAR",
         "TITLE": "UMA PERGUNTA SIMPLES",
         "YES": "SIM",
         "NO": {
             "DEFAULT": "NÃO",
             "TIP": "Acho que você está tentando pressionar o botão errado",
             "DISABLE": "Ok... Eu vou te ajudar",
-            "END": "Assim é melhor!"
+            "END": "Assim está melhor!"
         },
+        "LAST": "Última chance de mudar de ideia!",
         "CONFIRM": "Você tem certeza?"
     },
     "UK": {
+        "SALUTATION": "from Matheus to LIFE",
+        "INITIAL": "START",
         "TITLE": "A SIMPLE QUESTION",
         "YES": "YES",
         "NO": {
@@ -49,9 +54,12 @@ MESSAGES = {
             "DISABLE": "Ok... I'll help you",
             "END": "That's better!"
         },
+        "LAST": "Last chance to change your mind!",
         "CONFIRM": "Are you sure?"
     },
     "FR": {
+        "SALUTATION": "de Matheus pour la VIE",
+        "INITIAL": "COMMENCER",
         "TITLE": "UNE QUESTION SIMPLE",
         "YES": "OUI",
         "NO": {
@@ -60,9 +68,12 @@ MESSAGES = {
             "DISABLE": "D'accord... Je vais vous aider",
             "END": "C'est mieux!"
         },
+        "LAST": "Dernière chance de changer d'avis!",
         "CONFIRM": "Êtes-vous sûr?"
     },
     "ES": {
+        "SALUTATION": "de Matheus para la VIDA",
+        "INITIAL": "COMENZAR",
         "TITLE": "UNA PREGUNTA SIMPLE",
         "YES": "SÍ",
         "NO": {
@@ -71,9 +82,12 @@ MESSAGES = {
             "DISABLE": "Ok... Te ayudaré",
             "END": "¡Así es mejor!"
         },
+        "LAST": "¡Última oportunidad de cambiar de opinión!",
         "CONFIRM": "¿Estás seguro?"
     },
     "KR": {
+        "SALUTATION": "마테우스의 삶에 대한 질문",
+        "INITIAL": "시작",
         "TITLE": "간단한 질문",
         "YES": "예",
         "NO": {
@@ -82,6 +96,7 @@ MESSAGES = {
             "DISABLE": "좋아요... 도와 드릴게요",
             "END": "그게 낫다!"
         },
+        "LAST": "마음을 바꿀 마지막 기회입니다!",
         "CONFIRM": "확실합니까?"
     },
 }

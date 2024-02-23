@@ -26,6 +26,7 @@ class Button:
             screen.blit(text_surface, text_rect)
 
 
+
 class YesButton(Button):
     def __init__(self):
         self.rect = pygame.Rect(
@@ -219,18 +220,28 @@ class Text:
         self.massage = text
 
     def draw(self, screen):
+        self.text = self.font.render(self.massage, True, COLORS["BLACK"])
         screen.blit(self.text, self.rect)
 
     def update(self, event):
         pass
 
 
+class InitialText(Text):
+    def __init__(self, font_size, color, x, y, text=""):
+        super().__init__(text, font_size, color, x, y)
+
+    def draw(self, screen):
+        self.rect.x, self.rect.y = WIDTH // 2 - self.text.get_width() // 2, HEIGHT // 2 - self.text.get_height() // 2 - 10
+        self.text = self.font.render(MESSAGES[CURRENT_LANGUAGE]["SALUTATION"], True, COLORS["BLACK"])
+        screen.blit(self.text, self.rect)
+
 class Title(Text):
     def __init__(self, font_size, color, x, y, text=""):
         super().__init__(text, font_size, color, x, y)
 
     def draw(self, screen):
-        self.rect.x, self.rect.y = WIDTH // 2 - self.text.get_width() // 2, HEIGHT // 2 - 2 * BUTTON_HEIGHT
+        self.rect.x, self.rect.y = WIDTH // 2 - self.text.get_width() // 2, MARGIN // 2
         self.text = self.font.render(MESSAGES[CURRENT_LANGUAGE]["TITLE"], True, COLORS["BLACK"])
         screen.blit(self.text, self.rect)
 
@@ -274,6 +285,15 @@ class ConfirmText(Text):
 
 
     def draw(self, screen):
-        self.rect.x, self.rect.y  = WIDTH // 2 - self.text.get_width() // 2, HEIGHT // 2 - 2 * BUTTON_HEIGHT
+        self.rect.x, self.rect.y  = WIDTH // 2 - self.text.get_width() // 2, MARGIN // 2
         self.text = self.font.render(MESSAGES[CURRENT_LANGUAGE]["CONFIRM"], True, COLORS["BLACK"])
+        screen.blit(self.text, self.rect)
+
+class LastChanceText(Text):
+    def __init__(self, font_size, color, x, y, text=""):
+        super().__init__(text, font_size, color, x, y)
+
+    def draw(self, screen):
+        self.rect.x, self.rect.y = WIDTH // 2 - self.text.get_width() // 2, HEIGHT // 2 + 2 * BUTTON_HEIGHT
+        self.text = self.font.render(MESSAGES[CURRENT_LANGUAGE]["LAST"], True, COLORS["BLACK"])
         screen.blit(self.text, self.rect)

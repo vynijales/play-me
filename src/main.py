@@ -7,6 +7,7 @@ from components.constants import *
 
 from scenes.main_scene import main_scene
 from scenes.new_scene import new_scene
+from scenes.initial_scene import initial_scene
 
 
 def main():
@@ -16,10 +17,11 @@ def main():
     pygame.display.set_caption("PLAY ME")
 
     # Estado atual da cena
-    current_scene = "main_scene"
+    current_scene = "initial_scene"
 
     # Cenas
     SCENES = {
+        "initial_scene": initial_scene(),
         "main_scene": main_scene(),
         "new_scene": new_scene()
     }
@@ -37,6 +39,7 @@ def main():
                     for i in range(1, 4):
                         SCENES["main_scene"][i].update(event)
                 elif current_scene == "new_scene":
+                    SCENES["new_scene"][0].update(event)
                     SCENES["new_scene"][2].update(event)
                     SCENES["new_scene"][3].update(event)
             
@@ -63,7 +66,13 @@ def main():
                 # Reset the variable clicked of the "back" button
                 SCENES["new_scene"][3].clicked = False
                 current_scene = "main_scene"
-                print("Back to main scene")
+
+        elif current_scene == "initial_scene":
+            if pygame.time.get_ticks() > 5000:
+                current_scene = "main_scene"
+            SCENES["initial_scene"].draw(screen)
+
+
 
         for button in language_buttons:
             button.draw(screen)

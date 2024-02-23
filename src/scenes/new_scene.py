@@ -8,11 +8,10 @@ def new_scene():
                                2 + BUTTON_HEIGHT * 2, MESSAGES[CURRENT_LANGUAGE]["CONFIRM"],)
 
      
-    test = Text("TESTESTES",
-                 FONT_SIZE, COLORS["BLACK"],
-                 WIDTH // 2, HEIGHT // 2 + BUTTON_HEIGHT * 2)
+    last_chance = LastChanceText(FONT_SIZE, COLORS["BLACK"],
+                 WIDTH // 2, HEIGHT // 2 + BUTTON_HEIGHT * 2, MESSAGES[CURRENT_LANGUAGE]["LAST"])
 
     confirm_button = ConfirmButton()
     back_button = BackButton()
 
-    return test, confirm_text, confirm_button, back_button
+    return last_chance, confirm_text, confirm_button, back_button

@@ -4,7 +4,7 @@ from components.constants import *
 
 def create_title():
     global CURRENT_LANGUAGE, MESSAGES
-    return Title(int(FONT_SIZE * 1.5), COLORS["WHITE"], WIDTH // 2, HEIGHT // 2 - 2 * BUTTON_HEIGHT, MESSAGES[CURRENT_LANGUAGE]["TITLE"])
+    return Title(int(FONT_SIZE * 1.5), COLORS["WHITE"], WIDTH // 2, MARGIN, MESSAGES[CURRENT_LANGUAGE]["TITLE"])
 
 def create_buttons():
     yes_button = YesButton()
