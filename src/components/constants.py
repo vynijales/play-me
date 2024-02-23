@@ -62,7 +62,7 @@ MESSAGES = {
     "FR": {
         "SALUTATION": "de Matheus pour la VIE",
         "INITIAL": "COMMENCER",
-        "TITLE": "Veux-tu sortir avec moi",
+        "TITLE": "Veux-tu sortir avec moi?",
         "YES": "OUI",
         "NO": {
             "DEFAULT": "NON",

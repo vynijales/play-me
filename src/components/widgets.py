@@ -26,7 +26,6 @@ class Button:
             screen.blit(text_surface, text_rect)
 
 
-
 class YesButton(Button):
     def __init__(self):
         self.rect = pygame.Rect(
@@ -62,7 +61,6 @@ class YesButton(Button):
                 self.hover = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
-                print(COUNTER)
                 self.clicked = True
 
 
@@ -114,7 +112,7 @@ class ConfirmButton(Button):
         )
         self.image = load_button_image("assets/YES.png")
         self.hover_image = load_button_image("assets/YES_HOVER.png")
-        super().__init__(self.image, self.rect, self.hover_image)
+        super().__init__(self.image, self.rect, hover_image=self.hover_image)
 
     def update(self, event):
         global COUNTER
@@ -142,7 +140,8 @@ class BackButton(Button):
             BUTTON_HEIGHT
         )
         self.image = load_button_image("assets/NO.png")
-        super().__init__(self.image, self.rect)
+        self.hover_image = load_button_image("assets/NO_HOVER.png")
+        super().__init__(self.image, self.rect, self.hover_image, text="NO")
 
     def update(self, event):
         global COUNTER
