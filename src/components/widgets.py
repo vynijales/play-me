@@ -49,6 +49,11 @@ class YesButton(Button):
             Text(MASSAGES[CURRENT_LANGUAGE]["YES"], FONT_SIZE, COLORS["WHITE"], self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
 
     def update(self, event):
+        global COUNTER
+
+        if COUNTER == 0:
+            self.rect.x = WIDTH // 2 - BUTTON_WIDTH // 2 - MARGIN
+
         if event.type == pygame.MOUSEMOTION:
             if self.rect.collidepoint(event.pos):
                 self.hover = True
@@ -56,7 +61,7 @@ class YesButton(Button):
                 self.hover = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
-                print("YES")
+                print(COUNTER)
                 self.clicked = True
 
 class NoButton(Button):
@@ -78,6 +83,9 @@ class NoButton(Button):
                 self.rect.x, self.rect.y = random.randint(
                     0, WIDTH - BUTTON_WIDTH), random.randint(0, HEIGHT - BUTTON_HEIGHT - 80)
                 COUNTER = COUNTER + 1
+        if COUNTER == 0:
+            self.rect.x, self.rect.y = WIDTH // 2 - BUTTON_WIDTH // 2 + MARGIN, HEIGHT // 2 - BUTTON_HEIGHT
+            self.image = load_button_image("assets/NO.png")
 
     def draw(self, screen):
         if self.hover:
@@ -105,11 +113,13 @@ class BackButton(Button):
         super().__init__(self.image, self.rect)
 
     def update(self, event):
+        global COUNTER
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 self.clicked = True
         elif event.type == pygame.MOUSEBUTTONUP:
             self.clicked = False
+            COUNTER = 0
 
 class LanguageButton:
     def __init__(self, rect, language):
@@ -188,6 +198,9 @@ class InteractiveText(Text):
 
         self.rect.x = WIDTH // 2 - self.text.get_width() // 2
         self.rect.y = HEIGHT // 2 + 2 * BUTTON_HEIGHT
+
+        if COUNTER == 0:
+            self.text = self.font.render("", True, COLORS["WHITE"])
 
         if COUNTER >= CHECKPOINTS[2]:
             self.text = self.font.render(

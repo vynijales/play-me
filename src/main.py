@@ -28,8 +28,12 @@ def main():
     running = True
     while running:
         for event in pygame.event.get():
+            global COUNTER
+
             if event.type == pygame.QUIT:
-                running = False
+                if current_scene != "main_scene":
+                    running = False
+                
             else:
                 if current_scene == "main_scene":
                     SCENES["main_scene"][1].update(event)
