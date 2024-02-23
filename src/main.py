@@ -34,17 +34,17 @@ def main():
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                if current_scene == "last_scene":
+                if current_scene == "last_scene" or current_scene == "initial_scene":
                     running = False
-            else:
-                if current_scene == "main_scene":
-                    for i in range(1, 4):
-                        SCENES["main_scene"][i].update(event)
-                elif current_scene == "new_scene":
-                    SCENES["new_scene"][0].update(event)
-                    SCENES["new_scene"][2].update(event)
-                    SCENES["new_scene"][3].update(event)
             
+            if current_scene == "main_scene":
+                for i in range(1, 4):
+                    SCENES["main_scene"][i].update(event)
+
+            elif current_scene == "new_scene":
+                for i in range(4):
+                    SCENES["new_scene"][i].update(event)
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for button in language_buttons:
                     button.update(event)
@@ -56,7 +56,6 @@ def main():
                 SCENES["main_scene"][i].draw(screen)
 
             if SCENES["main_scene"][1].clicked:
-                # Reset the variable clicked of the "yes" button
                 SCENES["main_scene"][1].clicked = False
                 current_scene = "new_scene"
 
@@ -65,7 +64,6 @@ def main():
                 SCENES["new_scene"][i].draw(screen)
 
             if SCENES["new_scene"][2].clicked:
-                # Reset the variable clicked of the "yes" button
                 SCENES["new_scene"][2].clicked = False
                 current_scene = "last_scene"
 

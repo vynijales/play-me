@@ -46,7 +46,8 @@ class YesButton(Button):
             screen.blit(self.hover_image, self.rect)
         else:
             screen.blit(self.image, self.rect)
-        Text(MESSAGES[CURRENT_LANGUAGE]["YES"], FONT_SIZE, COLORS["WHITE"], self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
+        Text(MESSAGES[CURRENT_LANGUAGE]["YES"], FONT_SIZE, COLORS["WHITE"],
+             self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
 
     def update(self, event):
         global COUNTER
@@ -84,16 +85,19 @@ class NoButton(Button):
                     0, WIDTH - BUTTON_WIDTH), random.randint(0, HEIGHT - BUTTON_HEIGHT - 80)
                 COUNTER = COUNTER + 1
         if COUNTER == 0:
-            self.rect.x, self.rect.y = WIDTH // 2 - BUTTON_WIDTH // 2 + MARGIN, HEIGHT // 2 - BUTTON_HEIGHT
+            self.rect.x, self.rect.y = WIDTH // 2 - \
+                BUTTON_WIDTH // 2 + MARGIN, HEIGHT // 2 - BUTTON_HEIGHT
             self.image = load_button_image("assets/NO.png")
 
     def draw(self, screen):
         if self.hover:
             screen.blit(self.hover_image, self.rect)
-            Text(MESSAGES[CURRENT_LANGUAGE]["NO"]["DEFAULT"], FONT_SIZE, COLORS["WHITE"], self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
+            Text(MESSAGES[CURRENT_LANGUAGE]["NO"]["DEFAULT"], FONT_SIZE, COLORS["WHITE"],
+                 self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
         else:
             screen.blit(self.image, self.rect)
-            Text(MESSAGES[CURRENT_LANGUAGE]["NO"]["DEFAULT"], FONT_SIZE, COLORS["WHITE"], self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
+            Text(MESSAGES[CURRENT_LANGUAGE]["NO"]["DEFAULT"], FONT_SIZE, COLORS["WHITE"],
+                 self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
 
     def set_disable(self):
         self.image = load_button_image("assets/NO_DISABLE.png")
@@ -116,19 +120,23 @@ class ConfirmButton(Button):
 
     def update(self, event):
         global COUNTER
+
+        if event.type == pygame.MOUSEMOTION:
+            if self.rect.collidepoint(event.pos):
+                self.hover = True
+            else:
+                self.hover = False
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 self.clicked = True
         elif event.type == pygame.MOUSEBUTTONUP:
             self.clicked = False
-    
+
     def draw(self, screen):
-        if self.hover:
-            screen.blit(self.hover_image, self.rect)
-        else:
-            screen.blit(self.image, self.rect)
-        
-        Text(MESSAGES[CURRENT_LANGUAGE]["YES"], FONT_SIZE, COLORS["WHITE"], self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
+        super().draw(screen)
+        Text(MESSAGES[CURRENT_LANGUAGE]["YES"], FONT_SIZE, COLORS["WHITE"],
+             self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
 
 
 class BackButton(Button):
@@ -145,6 +153,13 @@ class BackButton(Button):
 
     def update(self, event):
         global COUNTER
+
+        if event.type == pygame.MOUSEMOTION:
+            if self.rect.collidepoint(event.pos):
+                self.hover = True
+            else:
+                self.hover = False
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 self.clicked = True
@@ -155,16 +170,19 @@ class BackButton(Button):
     def draw(self, screen):
         if self.hover:
             screen.blit(self.hover_image, self.rect)
-            Text(MESSAGES[CURRENT_LANGUAGE]["NO"]["DEFAULT"], FONT_SIZE, COLORS["WHITE"], self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
+            Text(MESSAGES[CURRENT_LANGUAGE]["NO"]["DEFAULT"], FONT_SIZE, COLORS["WHITE"],
+                 self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
         else:
             screen.blit(self.image, self.rect)
-            Text(MESSAGES[CURRENT_LANGUAGE]["NO"]["DEFAULT"], FONT_SIZE, COLORS["WHITE"], self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
+            Text(MESSAGES[CURRENT_LANGUAGE]["NO"]["DEFAULT"], FONT_SIZE, COLORS["WHITE"],
+                 self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
 
 
 class LanguageButton:
     def __init__(self, rect, language):
         self.language = language
-        self.image = load_button_image(f"assets/{language}.png", (LANGUAGE_WIDTH, LANGUAGE_HEIGHT))
+        self.image = load_button_image(
+            f"assets/{language}.png", (LANGUAGE_WIDTH, LANGUAGE_HEIGHT))
         self.rect = rect
         self.clicked = False
 
@@ -183,31 +201,36 @@ class LanguageButton:
 
 class BRButton(LanguageButton):
     def __init__(self):
-        rect = pygame.Rect(WIDTH / 5 - LANGUAGE_WIDTH * 2, HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
+        rect = pygame.Rect(WIDTH / 5 - LANGUAGE_WIDTH * 2,
+                           HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
         super().__init__(rect, "BR")
 
 
 class FRButton(LanguageButton):
     def __init__(self):
-        rect = pygame.Rect(WIDTH / 5 * 2 - LANGUAGE_WIDTH * 2, HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
+        rect = pygame.Rect(WIDTH / 5 * 2 - LANGUAGE_WIDTH * 2,
+                           HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
         super().__init__(rect, "FR")
 
 
 class UKButton(LanguageButton):
     def __init__(self):
-        rect = pygame.Rect(WIDTH / 5 * 3 - LANGUAGE_WIDTH * 2, HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
+        rect = pygame.Rect(WIDTH / 5 * 3 - LANGUAGE_WIDTH * 2,
+                           HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
         super().__init__(rect, "UK")
 
 
 class ESButton(LanguageButton):
     def __init__(self):
-        rect = pygame.Rect(WIDTH / 5 * 4 - LANGUAGE_WIDTH * 2, HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
+        rect = pygame.Rect(WIDTH / 5 * 4 - LANGUAGE_WIDTH * 2,
+                           HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
         super().__init__(rect, "ES")
 
 
 class KRButton(LanguageButton):
     def __init__(self):
-        rect = pygame.Rect(WIDTH / 5 * 5 - LANGUAGE_WIDTH * 2, HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
+        rect = pygame.Rect(WIDTH / 5 * 5 - LANGUAGE_WIDTH * 2,
+                           HEIGHT - MARGIN_FOOTER, LANGUAGE_WIDTH, LANGUAGE_HEIGHT)
         super().__init__(rect, "KR")
 
 
@@ -232,9 +255,12 @@ class InitialText(Text):
         super().__init__(text, font_size, color, x, y)
 
     def draw(self, screen):
-        self.rect.x, self.rect.y = WIDTH // 2 - self.text.get_width() // 2, HEIGHT // 2 - self.text.get_height() // 2 - 10
-        self.text = self.font.render(MESSAGES[CURRENT_LANGUAGE]["SALUTATION"], True, COLORS["BLACK"])
+        self.rect.x, self.rect.y = WIDTH // 2 - self.text.get_width() // 2, HEIGHT // 2 - \
+            self.text.get_height() // 2 - 10
+        self.text = self.font.render(
+            MESSAGES[CURRENT_LANGUAGE]["SALUTATION"], True, COLORS["BLACK"])
         screen.blit(self.text, self.rect)
+
 
 class Title(Text):
     def __init__(self, font_size, color, x, y, text=""):
@@ -242,7 +268,8 @@ class Title(Text):
 
     def draw(self, screen):
         self.rect.x, self.rect.y = WIDTH // 2 - self.text.get_width() // 2, MARGIN // 2
-        self.text = self.font.render(MESSAGES[CURRENT_LANGUAGE]["TITLE"], True, COLORS["BLACK"])
+        self.text = self.font.render(
+            MESSAGES[CURRENT_LANGUAGE]["TITLE"], True, COLORS["BLACK"])
         screen.blit(self.text, self.rect)
 
 
@@ -283,26 +310,32 @@ class ConfirmText(Text):
     def __init__(self, font_size, color, x, y, text=""):
         super().__init__(text, font_size, color, x, y)
 
-
     def draw(self, screen):
-        self.rect.x, self.rect.y  = WIDTH // 2 - self.text.get_width() // 2, MARGIN // 2
-        self.text = self.font.render(MESSAGES[CURRENT_LANGUAGE]["CONFIRM"], True, COLORS["BLACK"])
+        self.rect.x, self.rect.y = WIDTH // 2 - self.text.get_width() // 2, MARGIN // 2
+        self.text = self.font.render(
+            MESSAGES[CURRENT_LANGUAGE]["CONFIRM"], True, COLORS["BLACK"])
         screen.blit(self.text, self.rect)
+
 
 class LastChanceText(Text):
     def __init__(self, font_size, color, x, y, text=""):
         super().__init__(text, font_size, color, x, y)
 
     def draw(self, screen):
-        self.rect.x, self.rect.y = WIDTH // 2 - self.text.get_width() // 2, HEIGHT // 2 + 2 * BUTTON_HEIGHT
-        self.text = self.font.render(MESSAGES[CURRENT_LANGUAGE]["LAST"], True, COLORS["BLACK"])
+        self.rect.x, self.rect.y = WIDTH // 2 - \
+            self.text.get_width() // 2, HEIGHT // 2 + 2 * BUTTON_HEIGHT
+        self.text = self.font.render(
+            MESSAGES[CURRENT_LANGUAGE]["LAST"], True, COLORS["BLACK"])
         screen.blit(self.text, self.rect)
+
 
 class LoveYouText(Text):
     def __init__(self, font_size, color, x, y, text=""):
         super().__init__(text, font_size, color, x, y)
 
     def draw(self, screen):
-        self.rect.x, self.rect.y = (WIDTH - self.text.get_width()) // 2, (HEIGHT - self.text.get_height()) // 2
-        self.text = self.font.render(MESSAGES[CURRENT_LANGUAGE]["LOVE"], True, COLORS["BLACK"])
+        self.rect.x, self.rect.y = (
+            WIDTH - self.text.get_width()) // 2, (HEIGHT - self.text.get_height()) // 2
+        self.text = self.font.render(
+            MESSAGES[CURRENT_LANGUAGE]["LOVE"], True, COLORS["BLACK"])
         screen.blit(self.text, self.rect)
