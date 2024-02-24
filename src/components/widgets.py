@@ -4,7 +4,6 @@ import random
 from .base import *
 from .constants import *
 
-
 class Button:
     def __init__(self, image, rect, hover_image=None, hover=False, text=""):
         self.image = image
@@ -86,8 +85,13 @@ class NoButton(Button):
 
     def update(self, event):
         global COUNTER
+        pygame.mixer.init()
+
         if event.type == pygame.MOUSEMOTION:
             if self.rect.collidepoint(event.pos):
+                miss = pygame.mixer.Sound(resource_path('assets/sound/miss.wav'))
+                miss.set_volume(0.5)
+                miss.play()
                 self.rect.x, self.rect.y = random.randint(
                     0, WIDTH - BUTTON_WIDTH), random.randint(0, HEIGHT - BUTTON_HEIGHT - 80)
                 COUNTER = COUNTER + 1
@@ -129,6 +133,8 @@ class ConfirmButton(Button):
     def update(self, event):
         global COUNTER
 
+        pygame.mixer.init()
+        confirm = pygame.mixer.Sound(resource_path('assets/sound/confirm.wav'))
         if event.type == pygame.MOUSEMOTION:
             if self.rect.collidepoint(event.pos):
                 self.hover = True
@@ -138,7 +144,8 @@ class ConfirmButton(Button):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 self.clicked = True
-        elif event.type == pygame.MOUSEBUTTONUP:
+        elif event.type == pygame.MOUSEBUTTONUP and self.clicked:
+            confirm.play()
             self.clicked = False
 
     def draw(self, screen):
@@ -199,6 +206,9 @@ class LanguageButton:
 
     def update(self, event):
         global CURRENT_LANGUAGE
+        pygame.mixer.init()
+        language = pygame.mixer.Sound(resource_path('assets/sound/language.wav'))
+        language.set_volume(0.5)
 
         if self.language != CURRENT_LANGUAGE:
             self.image.set_alpha(100)
@@ -209,7 +219,8 @@ class LanguageButton:
             if self.rect.collidepoint(event.pos):
                 self.clicked = True
                 CURRENT_LANGUAGE = self.language
-        elif event.type == pygame.MOUSEBUTTONUP:
+        elif event.type == pygame.MOUSEBUTTONUP and self.clicked:
+            language.play()
             self.clicked = False
 
 

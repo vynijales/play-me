@@ -13,13 +13,19 @@ from scenes.last_scene import last_scene
 
 def main():
     pygame.init()
+    pygame.mixer.init()
 
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("PLAY ME")
     pygame.font.init()
 
+    pygame.mixer.music.load(resource_path("assets/sound/love.mp3"))
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play(-1, 0.0)
+
     # Estado atual da cena
     current_scene = "first_scene"
+    
     # Cenas
     SCENES = {
         "first_scene": first_scene(),
