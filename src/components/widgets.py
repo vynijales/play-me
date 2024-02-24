@@ -22,7 +22,7 @@ class Button:
         if self.text:
             if CURRENT_LANGUAGE == "KR":
                 font = pygame.font.Font(
-                    "assets/font/AlibabaSansKR-Regular.ttf", 12)
+                    resource_path("assets/font/AlibabaSansKR-Regular.ttf", 12))
             else:
                 font = pygame.font.Font(None, 16)
 
@@ -39,14 +39,11 @@ class YesButton(Button):
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
-        self.image = load_button_image("assets/YES.png")
-        self.hover_image = load_button_image("assets/YES_HOVER.png")
+        self.image = load_button_image(resource_path("assets/YES.png"))
+        self.hover_image = load_button_image(resource_path("assets/YES_HOVER.png"))
         super().__init__(self.image, self.rect, self.hover_image)
 
     def draw(self, screen):
-        if COUNTER >= CHECKPOINTS[2]:
-            self.rect.x = WIDTH // 2 - BUTTON_WIDTH // 2
-
         if self.hover:
             screen.blit(self.hover_image, self.rect)
         else:
@@ -59,6 +56,11 @@ class YesButton(Button):
 
         if COUNTER == 0:
             self.rect.x = WIDTH // 2 - BUTTON_WIDTH // 2 - MARGIN
+            self.rect.y = HEIGHT // 2 + MARGIN // 4
+
+        if COUNTER >= CHECKPOINTS[2]:
+            self.rect.x = WIDTH // 2 - BUTTON_WIDTH // 2
+            self.rect.y = HEIGHT // 2 - BUTTON_HEIGHT // 2
 
         if event.type == pygame.MOUSEMOTION:
             if self.rect.collidepoint(event.pos):
@@ -79,7 +81,7 @@ class NoButton(Button):
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
-        self.image = load_button_image("assets/NO.png")
+        self.image = load_button_image(resource_path("assets/NO.png"))
         super().__init__(self.image, self.rect, text="NO")
 
     def update(self, event):
@@ -92,7 +94,8 @@ class NoButton(Button):
         if COUNTER == 0:
             self.rect.x, self.rect.y = WIDTH // 2 - \
                 BUTTON_WIDTH // 2 + MARGIN, HEIGHT // 2 - BUTTON_HEIGHT
-            self.image = load_button_image("assets/NO.png")
+            self.rect.y = HEIGHT // 2 + MARGIN // 4
+            self.image = load_button_image(resource_path("assets/NO.png"))
 
     def draw(self, screen):
         if self.hover:
@@ -105,7 +108,7 @@ class NoButton(Button):
                  self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
 
     def set_disable(self):
-        self.image = load_button_image("assets/NO_DISABLE.png")
+        self.image = load_button_image(resource_path("assets/NO_DISABLE.png"))
 
     def get_out(self):
         self.rect.x, self.rect.y = -500, -500
@@ -119,8 +122,8 @@ class ConfirmButton(Button):
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
-        self.image = load_button_image("assets/YES.png")
-        self.hover_image = load_button_image("assets/YES_HOVER.png")
+        self.image = load_button_image(resource_path("assets/YES.png"))
+        self.hover_image = load_button_image(resource_path("assets/YES_HOVER.png"))
         super().__init__(self.image, self.rect, hover_image=self.hover_image)
 
     def update(self, event):
@@ -152,8 +155,8 @@ class BackButton(Button):
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
-        self.image = load_button_image("assets/NO.png")
-        self.hover_image = load_button_image("assets/NO_HOVER.png")
+        self.image = load_button_image(resource_path("assets/NO.png"))
+        self.hover_image = load_button_image(resource_path("assets/NO_HOVER.png"))
         super().__init__(self.image, self.rect, self.hover_image, text="NO")
 
     def update(self, event):
@@ -187,7 +190,7 @@ class LanguageButton:
     def __init__(self, rect, language):
         self.language = language
         self.image = load_button_image(
-            f"assets/{language}.png", (LANGUAGE_WIDTH, LANGUAGE_HEIGHT))
+            resource_path(f"assets/{language}.png"), (LANGUAGE_WIDTH, LANGUAGE_HEIGHT))
         self.rect = rect
         self.clicked = False
 
@@ -196,6 +199,12 @@ class LanguageButton:
 
     def update(self, event):
         global CURRENT_LANGUAGE
+
+        if self.language != CURRENT_LANGUAGE:
+            self.image.set_alpha(100)
+        else:
+            self.image.set_alpha(255)
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 self.clicked = True
@@ -242,7 +251,7 @@ class KRButton(LanguageButton):
 class Text:
     def __init__(self, text, font_size, color, x, y):
         if CURRENT_LANGUAGE == "KR":
-            self.font = pygame.font.Font("assets/font/AlibabaSansKR-Regular.ttf", font_size)
+            self.font = pygame.font.Font(resource_path("assets/font/AlibabaSansKR-Regular.ttf"), font_size)
         else:
             self.font = pygame.font.Font(None, font_size)
         self.text = self.font.render(text, True, color)
@@ -258,7 +267,7 @@ class Text:
     def update(self, event):
         if CURRENT_LANGUAGE == "KR":
             self.font = pygame.font.Font(
-                "assets/font/AlibabaSansKR-Regular.ttf", int(self.font_size * 0.85))
+                resource_path("assets/font/AlibabaSansKR-Regular.ttf"), int(self.font_size * 0.85))
         else:
             self.font = pygame.font.Font(None, self.font_size)
         
@@ -266,6 +275,7 @@ class Text:
 
     def center_x(self):
         self.rect.x = WIDTH // 2 - self.text.get_width() // 2
+
 
 class InitialText(Text):
     def __init__(self, font_size, color, x, y, text=""):
@@ -367,5 +377,27 @@ class Image:
     def draw(self, screen):
         screen.blit(self.image, self.rect)
     
+    def update(self, event):
+        pass
+
+
+class Particles:
+    def __init__(self, x, y, color):
+        self.x = x
+        self.y = y
+        self.color = color
+        self.radius = random.randint(1, 3)
+        self.speed = random.randint(1, 3)
+        self.direction = random.choice([1, -1])
+
+    def draw(self, screen):
+        self.x += self.speed * self.direction
+        self.y += self.speed * self.direction
+        pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
+        if self.x > WIDTH or self.x < 0:
+            self.direction *= -1
+        if self.y > HEIGHT or self.y < 0:
+            self.direction *= -1
+
     def update(self, event):
         pass

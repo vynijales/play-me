@@ -20,7 +20,6 @@ def main():
 
     # Estado atual da cena
     current_scene = "first_scene"
-
     # Cenas
     SCENES = {
         "first_scene": first_scene(),
@@ -71,13 +70,13 @@ def main():
                 current_scene = "last_scene"
 
             if SCENES["new_scene"][3].clicked:
-                # Reset the variable clicked of the "back" button
                 SCENES["new_scene"][3].clicked = False
                 current_scene = "main_scene"
 
         elif current_scene == "first_scene":
             if pygame.time.get_ticks() > 5000:
                 current_scene = "main_scene"
+
             SCENES["first_scene"].update(event)
             SCENES["first_scene"].draw(screen)
 
@@ -87,6 +86,7 @@ def main():
                 SCENES["last_scene"][i].draw(screen)
 
         for button in language_buttons:
+            button.update(event)
             button.draw(screen)
 
         pygame.display.flip()

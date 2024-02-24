@@ -8,6 +8,6 @@ def last_scene():
     love_text = LoveYouText(
         FONT_SIZE * 2, COLORS["DARK PURPLE"], WIDTH // 2, MARGIN // 2)
 
-    image = Image("assets/vaso.png", (300, 300), WIDTH // 2, HEIGHT // 2)
+    image = Image(resource_path("assets/vaso.png"), (300, 300), WIDTH // 2, HEIGHT // 2)
 
     return love_text, image

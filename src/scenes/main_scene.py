@@ -16,7 +16,7 @@ def create_buttons():
 
 def create_interactive_text(no_button):
     global CURRENT_LANGUAGE, MESSAGES
-    return InteractiveText(int(FONT_SIZE * 0.85), COLORS["WHITE"], WIDTH // 2, HEIGHT // 2 + 2 * BUTTON_HEIGHT, no_button, MESSAGES[CURRENT_LANGUAGE]["NO"]["TIP"])
+    return InteractiveText(int(FONT_SIZE * 0.85), COLORS["WHITE"], WIDTH // 2 - BUTTON_WIDTH // 2, HEIGHT // 2 + MARGIN // 4, no_button, MESSAGES[CURRENT_LANGUAGE]["NO"]["TIP"])
 
 
 def main_scene():
