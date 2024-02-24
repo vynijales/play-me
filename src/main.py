@@ -44,7 +44,12 @@ def main():
                 if current_scene == "last_scene" or current_scene == "first_scene":
                     running = False
 
-            if current_scene == "main_scene":
+            if current_scene == "first_scene":
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        current_scene = "main_scene"
+
+            elif current_scene == "main_scene":
                 for i in range(4):
                     SCENES["main_scene"][i].update(event)
                     SCENES["main_scene"][i].update(event)
@@ -80,11 +85,9 @@ def main():
                 current_scene = "main_scene"
 
         elif current_scene == "first_scene":
-            if pygame.time.get_ticks() > 5000:
-                current_scene = "main_scene"
-
-            SCENES["first_scene"].update(event)
-            SCENES["first_scene"].draw(screen)
+            for i in range(2):
+                SCENES["first_scene"][i].update(event)
+                SCENES["first_scene"][i].draw(screen)
 
         elif current_scene == "last_scene":
             for i in range(2):

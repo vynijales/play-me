@@ -294,11 +294,21 @@ class InitialText(Text):
 
     def draw(self, screen):
         self.rect.x, self.rect.y = WIDTH // 2 - self.text.get_width() // 2, HEIGHT // 2 - \
-            self.text.get_height() // 2 - 10
+            self.text.get_height() // 2 - 30
         self.text = self.font.render(
             MESSAGES[CURRENT_LANGUAGE]["SALUTATION"], True, COLORS["BLACK"])
         screen.blit(self.text, self.rect)
 
+class StartText(Text):
+    def __init__(self, font_size, color, x, y, text=""):
+        super().__init__(text, font_size, color, x, y)
+
+    def draw(self, screen):
+        self.rect.x, self.rect.y = WIDTH // 2 - self.text.get_width() // 2, HEIGHT // 2 + \
+            self.text.get_height() // 2 + BUTTON_HEIGHT - 50
+        self.text = self.font.render(
+            MESSAGES[CURRENT_LANGUAGE]["INITIAL"], True, COLORS["BLACK"])
+        screen.blit(self.text, self.rect)
 
 class Title(Text):
     def __init__(self, font_size, color, x, y, text=""):

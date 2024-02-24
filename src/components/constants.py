@@ -38,7 +38,7 @@ COLORS = {
 MESSAGES = {
     "BR": {
         "SALUTATION": "de Matheus para VIDA",
-        "INITIAL": "INICIAR",
+        "INITIAL": "Pressione 'Espaço' para começar",
         "TITLE": "Quer ser minha namorada?",
         "YES": "SIM",
         "NO": {
@@ -53,7 +53,7 @@ MESSAGES = {
     },
     "UK": {
         "SALUTATION": "from Matheus to LIFE",
-        "INITIAL": "START",
+        "INITIAL": "Press 'Space' to start",
         "TITLE": "Do you want to be my girlfriend?",
         "YES": "YES",
         "NO": {
@@ -68,7 +68,7 @@ MESSAGES = {
     },
     "FR": {
         "SALUTATION": "de Matheus pour la VIE",
-        "INITIAL": "COMMENCER",
+        "INITIAL": "Appuyez sur 'Espace' pour commencer",
         "TITLE": "Veux-tu être ma copine?",
         "YES": "OUI",
         "NO": {
@@ -83,7 +83,7 @@ MESSAGES = {
     },
     "ES": {
         "SALUTATION": "de Matheus para la VIDA",
-        "INITIAL": "COMENZAR",
+        "INITIAL": "Presiona 'Espacio' para comenzar",
         "TITLE": "¿Quieres ser mi novia?",
         "YES": "SÍ",
         "NO": {
@@ -98,7 +98,7 @@ MESSAGES = {
     },
     "KR": {
         "SALUTATION": "마테우스의 삶에 대한 질문",
-        "INITIAL": "시작",
+        "INITIAL": "시작하려면 '스페이스'를 누르십시오",
         "TITLE": "여자친구가 되고 싶니?",
         "YES": "예",
         "NO": {
