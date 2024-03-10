@@ -38,8 +38,8 @@ class YesButton(Button):
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
-        self.image = load_button_image(resource_path("assets/YES.png"))
-        self.hover_image = load_button_image(resource_path("assets/YES_HOVER.png"))
+        self.image = load_button_image(resource_path("assets/image/YES.png"))
+        self.hover_image = load_button_image(resource_path("assets/image/YES_HOVER.png"))
         super().__init__(self.image, self.rect, self.hover_image)
 
     def draw(self, screen):
@@ -80,7 +80,7 @@ class NoButton(Button):
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
-        self.image = load_button_image(resource_path("assets/NO.png"))
+        self.image = load_button_image(resource_path("assets/image/NO.png"))
         super().__init__(self.image, self.rect, text="NO")
 
     def update(self, event):
@@ -99,7 +99,7 @@ class NoButton(Button):
             self.rect.x, self.rect.y = WIDTH // 2 - \
                 BUTTON_WIDTH // 2 + MARGIN, HEIGHT // 2 - BUTTON_HEIGHT
             self.rect.y = HEIGHT // 2 + MARGIN // 4
-            self.image = load_button_image(resource_path("assets/NO.png"))
+            self.image = load_button_image(resource_path("assets/image/NO.png"))
 
     def draw(self, screen):
         if self.hover:
@@ -112,7 +112,7 @@ class NoButton(Button):
                  self.rect.x + BUTTON_WIDTH // 2, self.rect.y + BUTTON_HEIGHT // 2).draw(screen)
 
     def set_disable(self):
-        self.image = load_button_image(resource_path("assets/NO_DISABLE.png"))
+        self.image = load_button_image(resource_path("assets/image/NO_DISABLE.png"))
 
     def get_out(self):
         self.rect.x, self.rect.y = -500, -500
@@ -126,8 +126,8 @@ class ConfirmButton(Button):
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
-        self.image = load_button_image(resource_path("assets/YES.png"))
-        self.hover_image = load_button_image(resource_path("assets/YES_HOVER.png"))
+        self.image = load_button_image(resource_path("assets/image/YES.png"))
+        self.hover_image = load_button_image(resource_path("assets/image/YES_HOVER.png"))
         super().__init__(self.image, self.rect, hover_image=self.hover_image)
 
     def update(self, event):
@@ -162,8 +162,8 @@ class BackButton(Button):
             BUTTON_WIDTH,
             BUTTON_HEIGHT
         )
-        self.image = load_button_image(resource_path("assets/NO.png"))
-        self.hover_image = load_button_image(resource_path("assets/NO_HOVER.png"))
+        self.image = load_button_image(resource_path("assets/image/NO.png"))
+        self.hover_image = load_button_image(resource_path("assets/image/NO_HOVER.png"))
         super().__init__(self.image, self.rect, self.hover_image, text="NO")
 
     def update(self, event):
@@ -197,7 +197,7 @@ class LanguageButton:
     def __init__(self, rect, language):
         self.language = language
         self.image = load_button_image(
-            resource_path(f"assets/{language}.png"), (LANGUAGE_WIDTH, LANGUAGE_HEIGHT))
+            resource_path(f"assets/image/{language}.png"), (LANGUAGE_WIDTH, LANGUAGE_HEIGHT))
         self.rect = rect
         self.clicked = False
 
