@@ -6,7 +6,11 @@ Este é um projeto pessoal em Python usando a biblioteca Pygame para criar um pe
 
 <div align="center">
 
+<div align="center">
+
 https://github.com/vynijales/play-me/assets/92933508/1b88ced8-884c-4bcc-8995-6057f1c77b35
+
+</div>
 
 </div>
 
