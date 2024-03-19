@@ -1,6 +1,6 @@
 # ❤️ Play Me
 
-Este é um projeto pessoal em Python usando a biblioteca Pygame para criar um pedido de namoro especial. 💕
+Este é um projeto pessoal feito em Python usando a biblioteca Pygame para criar um pedido de namoro especial. 💕
 
 ## 💻 Em Execução
 
